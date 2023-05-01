@@ -1,17 +1,12 @@
 package com.example.library_database
 
-import android.R.*
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import org.w3c.dom.Text
 import android.widget.TableLayout
-import android.widget.AdapterView
 import android.widget.TableRow
 import android.widget.TextView
-import android.widget.ArrayAdapter
 import android.database.sqlite.SQLiteDatabase
 import android.util.TypedValue
 
@@ -22,10 +17,10 @@ class GetLateActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.get_late_activity)
 
-        val startRange = findViewById<TextView>(R.id.start_range)
-        val endRange = findViewById<TextView>(R.id.end_range)
-        val lateTable = findViewById<TableLayout>(R.id.late_table)
-        val lateButton = findViewById<View>(R.id.get_range_button)
+        val startRange = findViewById<TextView>(R.id.book_id_field)
+        val endRange = findViewById<TextView>(R.id.book_name_field)
+        val lateTable = findViewById<TableLayout>(R.id.get_borrower_table)
+        val lateButton = findViewById<View>(R.id.get_books_list_button)
         //--------------------------------------------------------------------
         lateButton.setOnClickListener {
 

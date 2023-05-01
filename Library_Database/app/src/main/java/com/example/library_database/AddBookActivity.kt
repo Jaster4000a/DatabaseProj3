@@ -19,7 +19,7 @@ class AddBookActivity : AppCompatActivity() {
         //val bookQueryResult = mutableListOf<String>()
         val publisherQueryResult = mutableListOf<String>()
 
-        val newBookName=findViewById<EditText>(R.id.copy_book_title)
+        val newBookName=findViewById<EditText>(R.id.book_id_search)
         val newBookPublisherSpinner = findViewById<Spinner>(R.id.new_book_publisher)
         val newBookAuthor=findViewById<EditText>(R.id.new_book_author)
         val confirmCheckoutButton = findViewById<View>(R.id.confirm_new_book)

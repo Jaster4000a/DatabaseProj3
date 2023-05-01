@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/copy_book_title"
+        android:id="@+id/book_id_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -37,8 +37,8 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/copy_book_title"
-        app:layout_constraintTop_toBottomOf="@+id/copy_book_title" />
+        app:layout_constraintStart_toStartOf="@+id/book_id_search"
+        app:layout_constraintTop_toBottomOf="@+id/book_id_search" />
 
     <Button
         android:id="@+id/confirm_new_book"
@@ -56,8 +56,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:text="new book name"
-        app:layout_constraintEnd_toStartOf="@+id/copy_book_title"
-        app:layout_constraintTop_toTopOf="@+id/copy_book_title" />
+        app:layout_constraintEnd_toStartOf="@+id/book_id_search"
+        app:layout_constraintTop_toTopOf="@+id/book_id_search" />
 
     <TextView
         android:id="@+id/textView6"

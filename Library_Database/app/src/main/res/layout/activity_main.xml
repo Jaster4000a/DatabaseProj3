@@ -38,6 +38,27 @@
         app:layout_constraintTop_toBottomOf="@+id/get_copies_button" />
 
     <Button
+        android:id="@+id/list_borrower_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="104dp"
+        android:text="List Borrower's Debts"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/get_copies_button" />
+
+    <Button
+        android:id="@+id/book_info_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="184dp"
+        android:text="Book's Info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/get_copies_button" />
+
+    <Button
         android:id="@+id/add_book_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

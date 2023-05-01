@@ -1,9 +1,7 @@
 package com.example.library_database
 
-import android.R.*
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import android.database.sqlite.SQLiteDatabase
@@ -12,7 +10,6 @@ import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 import kotlin.random.Random
-import com.example.library_database.BorrowerInfo
 
 
 class CreateBorrowerActivity : AppCompatActivity() {
@@ -23,7 +20,7 @@ class CreateBorrowerActivity : AppCompatActivity() {
 
         val db = SQLiteDatabase.openDatabase("/data/data/com.example.library_database/databases/LMS.db", null, SQLiteDatabase.OPEN_READWRITE)
 
-        val borrowerNameField=findViewById<EditText>(R.id.borrower_name_field)
+        val borrowerNameField=findViewById<EditText>(R.id.book_name_field)
         val borrowerAddressField=findViewById<EditText>(R.id.borrower_address_field)
         val borrowerPhoneField=findViewById<EditText>(R.id.borrower_phone_field)
         val confirmBorrowerButton=findViewById<Button>(R.id.confirm_borrower_button)

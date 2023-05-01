@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/copy_book_title"
+        android:id="@+id/book_id_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -17,26 +17,26 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/copy_book_title2"
+        android:id="@+id/book_name_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="End Range YYYY-MM-DD"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/end_range" />
+        app:layout_constraintTop_toTopOf="@+id/book_name_field" />
 
     <EditText
-        android:id="@+id/start_range"
+        android:id="@+id/book_id_field"
         android:layout_width="180dp"
         android:layout_height="45dp"
         android:ems="10"
         android:hint="YYYY-MM-DD"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/copy_book_title" />
+        app:layout_constraintTop_toTopOf="@+id/book_id_search" />
 
     <EditText
-        android:id="@+id/end_range"
+        android:id="@+id/book_name_field"
         android:layout_width="175dp"
         android:layout_height="39dp"
         android:layout_marginTop="32dp"
@@ -44,10 +44,10 @@
         android:hint="YYYY-MM-DD"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start_range" />
+        app:layout_constraintTop_toBottomOf="@+id/book_id_field" />
 
     <TableLayout
-        android:id="@+id/late_table"
+        android:id="@+id/get_borrower_table"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scrollbars="horizontal|vertical"
@@ -55,7 +55,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/get_range_button"
+        app:layout_constraintTop_toBottomOf="@+id/get_books_list_button"
         app:layout_constraintVertical_bias="1.0">
 
         <TableRow
@@ -76,13 +76,13 @@
     </TableLayout>
 
     <Button
-        android:id="@+id/get_range_button"
+        android:id="@+id/get_books_list_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Go"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/end_range" />
+        app:layout_constraintTop_toBottomOf="@+id/book_name_field" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,13 +36,13 @@
     </TableLayout>
 
     <TextView
-        android:id="@+id/copy_book_title"
+        android:id="@+id/book_id_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginTop="32dp"
         android:text="Name"
-        app:layout_constraintEnd_toStartOf="@+id/borrower_name_field"
+        app:layout_constraintEnd_toStartOf="@+id/book_name_field"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -55,7 +55,7 @@
         android:text="Address"
         app:layout_constraintEnd_toStartOf="@+id/borrower_address_field"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/borrower_name_field" />
+        app:layout_constraintTop_toBottomOf="@+id/book_name_field" />
 
     <TextView
         android:id="@+id/textView5"
@@ -78,7 +78,7 @@
         android:ems="10"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/borrower_name_field" />
+        app:layout_constraintTop_toBottomOf="@+id/book_name_field" />
 
     <EditText
         android:id="@+id/borrower_phone_field"
@@ -92,7 +92,7 @@
         app:layout_constraintTop_toBottomOf="@+id/borrower_address_field" />
 
     <EditText
-        android:id="@+id/borrower_name_field"
+        android:id="@+id/book_name_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
