@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         val getLateButton=findViewById<View>(R.id.get_late_button)
         val listBorrowers=findViewById<View>(R.id.list_borrower_button)
         val bookInfo=findViewById<View>(R.id.book_info_button)
+        val devTables=findViewById<View>(R.id.dev_tables)
 
 
         checkoutBookButton.isEnabled=false
@@ -54,6 +55,10 @@ class MainActivity : AppCompatActivity() {
         }
         bookInfo.setOnClickListener{
             val intent = Intent(this, BookInfoActivity::class.java)
+            startActivity(intent)
+        }
+        devTables.setOnClickListener{
+            val intent = Intent(this, DevTableActivity::class.java)
             startActivity(intent)
         }
     }

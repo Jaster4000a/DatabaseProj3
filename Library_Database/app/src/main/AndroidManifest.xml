@@ -29,6 +29,7 @@
         <activity android:name=".GetLateActivity"/>
         <activity android:name=".ListBorrowersActivity"/>
         <activity android:name=".BookInfoActivity"/>
+        <activity android:name=".DevTableActivity"/>
     </application>
 
 </manifest>
