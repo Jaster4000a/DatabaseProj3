@@ -69,7 +69,7 @@ class CheckoutBookActivity : AppCompatActivity() {
                         FROM BOOK b
                         JOIN BOOK_COPIES bc ON b.Book_Id = bc.Book_Id
                         JOIN LIBRARY_BRANCH lb ON bc.Branch_Id = lb.Branch_Id
-                        WHERE b.Title = '$bookSelected' AND lb.Branch_Name = '$branchSelected';
+                        WHERE b.Title = '${bookSelected.replace("'", "''")}' AND lb.Branch_Name = '$branchSelected';
             """, null)
 
             val confirmationTableLayout = findViewById<TableLayout>(R.id.borrower_table)
@@ -94,7 +94,7 @@ class CheckoutBookActivity : AppCompatActivity() {
                     calendar.add(Calendar.DAY_OF_YEAR, 14) // add 14 days to the current date
                     val futureDate = calendar.time
                     val futureDateString = dateFormat.format(futureDate)
-                    val returnedQuery = """INSERT INTO BOOK_LOANS (Book_Id, Branch_Id, Card_No, Date_Out, Due_Date, Returned_date) VALUES ($book, $branch, '$BorrowerInfo.getBorrowerId().toString()', '$dateString', '$futureDateString', NULL);"""
+                    val returnedQuery = """INSERT INTO BOOK_LOANS (Book_Id, Branch_Id, Card_No, Date_Out, Due_Date, Returned_date) VALUES ($book, $branch, '${BorrowerInfo.getBorrowerId().toString().replace("'", "''")}', '$dateString', '$futureDateString', NULL);"""
                     db.rawQuery(returnedQuery, null)
                     Log.v("Hello",returnedQuery)
                     confirmationData += arrayOf(book, branch, copies)

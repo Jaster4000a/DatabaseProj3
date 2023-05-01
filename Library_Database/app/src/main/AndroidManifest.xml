@@ -27,7 +27,8 @@
         <activity android:name=".AddBookActivity"/>
         <activity android:name=".GetCopiesActivity"/>
         <activity android:name=".GetLateActivity"/>
-
+        <activity android:name=".ListBorrowersActivity"/>
+        <activity android:name=".BookInfoActivity"/>
     </application>
 
 </manifest>
