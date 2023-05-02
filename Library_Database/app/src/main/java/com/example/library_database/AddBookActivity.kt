@@ -40,6 +40,10 @@ class AddBookActivity : AppCompatActivity() {
         }
         val branchList = ArrayAdapter(this, android.R.layout.simple_spinner_item, publisherQueryResult)
         newBookPublisherSpinner.adapter = branchList
+        cursor.close()
+        db.close()
+
+
         //---------------------------------------------------------------------------
         newBookPublisherSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
@@ -54,19 +58,30 @@ class AddBookActivity : AppCompatActivity() {
         }
 
         confirmCheckoutButton.setOnClickListener {
-            var newcursor = db.rawQuery("""SELECT MAX(book_id) FROM BOOK;""", null)
+            val db2 = SQLiteDatabase.openDatabase(
+                "/data/data/com.example.library_database/databases/LMS.db",
+                null,
+                SQLiteDatabase.OPEN_READWRITE
+            )
+            //db2.beginTransaction()
+            var newcursor = db2.rawQuery("""SELECT MAX(book_id) FROM BOOK;""", null)
             newcursor.moveToFirst()
             var book_id_query=newcursor.getString(0).toInt()+1
 
-
-            db.rawQuery("""INSERT INTO BOOK (book_id, Title, Book_publisher) VALUES ($book_id_query, '$newBookName.text.toString()', '$publisherSelected');""",null)
-            db.rawQuery("""INSERT INTO BOOK_AUTHORS (book_id, Author_Name) VALUES ($book_id_query, '$newBookAuthor.text.toString()');""",null)
-            db.rawQuery("""INSERT INTO BOOK_COPIES (Book_Id, Branch_Id, No_Of_Copies)
+            db2.execSQL("""INSERT INTO BOOK (book_id, Title, Book_publisher) VALUES ($book_id_query, '${newBookName.text.toString()}', '$publisherSelected');""")
+            db2.execSQL("""INSERT INTO BOOK_AUTHORS (book_id, Author_Name) VALUES ($book_id_query, '${newBookAuthor.text.toString()}');""")
+            db2.execSQL("""INSERT INTO BOOK_COPIES (Book_Id, Branch_Id, No_Of_Copies)
                                     VALUES ($book_id_query, 1, 5),
                                           ($book_id_query, 2, 5),
                                           ($book_id_query, 3, 5),
                                           ($book_id_query, 4, 5),
-                                          ($book_id_query, 5, 5);""",null)
+                                          ($book_id_query, 5, 5);""")
+
+            //db2.setTransactionSuccessful()
+            //db2.endTransaction()
+            newcursor.close()
+            db2.close()
+
         }
     }
 

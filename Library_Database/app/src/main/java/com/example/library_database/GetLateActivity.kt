@@ -74,6 +74,8 @@ WHERE bl.Due_Date > '${startRange.text.toString()}' and bl.Due_Date < '${endRang
                     lateTable.addView(tableRow)
                 }
             }
+            cursor.close()
+            db.close()
         }
     }
 }

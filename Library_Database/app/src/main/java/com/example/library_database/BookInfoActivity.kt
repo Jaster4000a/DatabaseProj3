@@ -58,6 +58,7 @@ ORDER BY Late_Fee_Amount DESC;""", null
             }
 
         }
+        cursor.close()
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

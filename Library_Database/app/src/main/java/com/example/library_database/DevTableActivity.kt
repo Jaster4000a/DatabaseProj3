@@ -14,37 +14,6 @@ import android.util.TypedValue
 import kotlin.random.Random
 
 class DevTableActivity: AppCompatActivity() {
-//    fun updateListTable(db: SQLiteDatabase, tableName:String, ListTable:TableLayout){
-//        val cursor = db.rawQuery(
-//            """SELECT * FROM $tableName""", null
-//        )
-//        ListTable.removeAllViews()
-//        val columnCount = cursor.columnCount
-//        val data = Array(columnCount) { arrayOfNulls<String>((columnCount)}
-//        for (i in 0 until columnCount) {
-//            data[i] = Array(columnCount) { cursor.getColumnName(i) }
-//        }
-//
-//        if (cursor.moveToFirst()) {
-//            do {
-//                val cardNo = cursor.getString(0)
-//                val BorrowerID = cursor.getString(1)
-//                val BorrowerName = cursor.getString(2)
-//                data += arrayOf(cardNo, BorrowerID, BorrowerName)
-//            } while (cursor.moveToNext())
-//
-//            for (i in data.indices) {
-//                val tableRow = TableRow(this)
-//                for (j in data[i].indices) {
-//                    val textView = TextView(this)
-//                    textView.text = data[i][j]
-//                    tableRow.addView(textView)
-//                }
-//                ListTable.addView(tableRow)
-//            }
-//
-//        }
-//    }
 fun updateListTable(db: SQLiteDatabase, tableName: String, listTable: TableLayout) {
     val cursor = db.rawQuery("SELECT * FROM $tableName", null)
     listTable.removeAllViews()
@@ -76,6 +45,8 @@ fun updateListTable(db: SQLiteDatabase, tableName: String, listTable: TableLayou
         }
         listTable.addView(tableRow)
     }
+    cursor.close()
+    db.close()
 }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -30,6 +30,7 @@
         <activity android:name=".ListBorrowersActivity"/>
         <activity android:name=".BookInfoActivity"/>
         <activity android:name=".DevTableActivity"/>
+        <activity android:name=".ManualModeActivity"/>
     </application>
 
 </manifest>

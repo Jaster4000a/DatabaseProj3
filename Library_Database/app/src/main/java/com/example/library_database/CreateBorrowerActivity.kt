@@ -34,13 +34,14 @@ class CreateBorrowerActivity : AppCompatActivity() {
             var continueGenerateRandomNumber=true
             do {
                 randomSixDigitNumber = random.nextInt(900000)+100000
-                var cursor = db.rawQuery("""SELECT NOT EXISTS(SELECT card_no FROM BORROWER WHERE card_no='123456')""", null)
+                var cursor = db.rawQuery("""SELECT NOT EXISTS(SELECT card_no FROM BORROWER WHERE card_no='$randomSixDigitNumber')""", null)
                 cursor.moveToFirst()
-                continueGenerateRandomNumber=if (cursor.getString(0)=="1") true else false
+                continueGenerateRandomNumber=if (cursor.getString(0)=="0") true else false
+                cursor.close()
                 //Log.v("HELLO",continueGenerateRandomNumber.toString())
             }while(continueGenerateRandomNumber)
 
-            var cursor = db.rawQuery("""INSERT INTO BORROWER (Card_No, Name, Address, Phone) VALUES ($randomSixDigitNumber, '$borrowerNameField.text.toString()', '$borrowerAddressField.text.toString()', '$borrowerPhoneField.text.toString()');""", null)
+            db.execSQL("""INSERT INTO BORROWER (Card_No, Name, Address, Phone) VALUES ($randomSixDigitNumber, '${borrowerNameField.text.toString()}', '${borrowerAddressField.text.toString()}', '${borrowerPhoneField.text.toString()}');""")
             Data = arrayOf(arrayOf(randomSixDigitNumber.toString(),borrowerNameField.text.toString(),borrowerAddressField.text.toString(),borrowerPhoneField.text.toString()))
             BorrowerInfo.setBorrowerId(randomSixDigitNumber)
             Log.v("HELLO",BorrowerInfo.getBorrowerId().toString())
@@ -53,6 +54,7 @@ class CreateBorrowerActivity : AppCompatActivity() {
                 }
                 borrowerTable.addView(tableRow)
             }
+            db.close()
         }
     }
 }

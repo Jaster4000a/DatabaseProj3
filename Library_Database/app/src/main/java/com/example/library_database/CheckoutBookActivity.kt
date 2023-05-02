@@ -63,7 +63,7 @@ class CheckoutBookActivity : AppCompatActivity() {
                 SQLiteDatabase.OPEN_READWRITE
             )
 
-            db.rawQuery("""UPDATE BOOK_COPIES SET No_Of_Copies = No_Of_Copies - 1 WHERE Book_Id = book_id AND Branch_Id = branch_id;""", null)
+            db.execSQL("""UPDATE BOOK_COPIES SET No_Of_Copies = No_Of_Copies - 1 WHERE Book_Id = book_id AND Branch_Id = branch_id;""")
 
             var confirmationCursor = db.rawQuery("""SELECT b.Book_Id, lb.Branch_Id, bc.no_of_copies
                         FROM BOOK b
@@ -89,14 +89,13 @@ class CheckoutBookActivity : AppCompatActivity() {
                     val copies = confirmationCursor.getString(2)
                     val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                     val currentDate = Date()
-                    val dateString = dateFormat.format(currentDate)
+                    val dateString = dateFormat.format(currentDate) + " 00:00:00.000000"
                     val calendar = Calendar.getInstance()
                     calendar.add(Calendar.DAY_OF_YEAR, 14) // add 14 days to the current date
                     val futureDate = calendar.time
-                    val futureDateString = dateFormat.format(futureDate)
-                    val returnedQuery = """INSERT INTO BOOK_LOANS (Book_Id, Branch_Id, Card_No, Date_Out, Due_Date, Returned_date) VALUES ($book, $branch, '${BorrowerInfo.getBorrowerId().toString().replace("'", "''")}', '$dateString', '$futureDateString', NULL);"""
-                    db.rawQuery(returnedQuery, null)
-                    Log.v("Hello",returnedQuery)
+                    val futureDateString = dateFormat.format(futureDate) + " 00:00:00.000000"
+                    val returnedQuery = """INSERT INTO BOOK_LOANS (Book_Id, Branch_Id, Card_No, Date_Out, Due_Date, Returned_date) VALUES (${book.replace("'", "''")}, $branch, '${BorrowerInfo.getBorrowerId().toString().replace("'", "''")}', '$dateString', '$futureDateString', NULL);"""
+                    db.execSQL(returnedQuery)
                     confirmationData += arrayOf(book, branch, copies)
                 } while (confirmationCursor.moveToNext())
 
@@ -111,6 +110,8 @@ class CheckoutBookActivity : AppCompatActivity() {
                     confirmationTableLayout.addView(tableRow)
                 }
             }
+            confirmationCursor.close()
+            db.close()
 
         }
 

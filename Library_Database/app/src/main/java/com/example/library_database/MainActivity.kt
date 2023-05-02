@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         val listBorrowers=findViewById<View>(R.id.list_borrower_button)
         val bookInfo=findViewById<View>(R.id.book_info_button)
         val devTables=findViewById<View>(R.id.dev_tables)
+        val manualModeButton=findViewById<View>(R.id.manual_mode_button)
 
 
         checkoutBookButton.isEnabled=false
@@ -59,6 +60,10 @@ class MainActivity : AppCompatActivity() {
         }
         devTables.setOnClickListener{
             val intent = Intent(this, DevTableActivity::class.java)
+            startActivity(intent)
+        }
+        manualModeButton.setOnClickListener{
+            val intent = Intent(this, ManualModeActivity::class.java)
             startActivity(intent)
         }
     }

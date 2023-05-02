@@ -52,6 +52,7 @@ GROUP BY bo.Card_No, bo.Name;""", null
                 }
 
             }
+            cursor.close()
         }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
