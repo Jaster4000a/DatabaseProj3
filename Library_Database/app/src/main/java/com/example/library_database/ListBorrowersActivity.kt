@@ -18,12 +18,13 @@ class ListBorrowersActivity : AppCompatActivity() {
         fun updateBorrowerListTable(db: SQLiteDatabase, borrowerId:String, borrowerName:String, borrowerListTable:TableLayout){
             val cursor = db.rawQuery(
                 """SELECT bo.Card_No AS Borrower_ID, bo.Name AS Borrower_Name,
-      COALESCE(SUM(CASE WHEN julianday(bl.Returned_date) > julianday(bl.Due_Date) THEN (julianday(bl.Returned_date) - julianday(bl.Due_Date)) * lb.LateFee ELSE 0 END), 0) AS LateFee_Balance
+      '$ ' || printf('%.2f',COALESCE(SUM(CASE WHEN julianday(bl.Returned_date) > julianday(bl.Due_Date) THEN (julianday(bl.Returned_date) - julianday(bl.Due_Date)) * lb.LateFee ELSE 0 END), 0)) AS LateFee_Balance
 FROM BORROWER bo
 LEFT JOIN BOOK_LOANS bl ON bo.Card_No = bl.Card_No
 LEFT JOIN LIBRARY_BRANCH lb ON bl.Branch_Id = lb.Branch_Id
 WHERE bo.Card_No LIKE '%$borrowerId%' AND bo.Name LIKE '%$borrowerName%'
-GROUP BY bo.Card_No, bo.Name;""", null
+GROUP BY bo.Card_No, bo.Name
+ORDER BY LateFee_Balance desc;""", null
             )
             borrowerListTable.removeAllViews()
             var data = Array(3) { arrayOf("", "", "") }
