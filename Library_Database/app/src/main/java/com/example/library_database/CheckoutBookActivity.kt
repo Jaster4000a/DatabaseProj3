@@ -7,6 +7,7 @@ import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.ArrayAdapter
 import android.database.sqlite.SQLiteDatabase
+import android.util.TypedValue
 import android.widget.TableLayout
 import android.widget.AdapterView
 import android.widget.TableRow
@@ -164,6 +165,7 @@ ORDER BY lb.Branch_Name, b.Title;""", null
                 val tableRow = TableRow(this)
                 for (j in data[i].indices) {
                     val textView = TextView(this)
+                    textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10.toFloat())
                     textView.text = data[i][j]
                     tableRow.addView(textView)
                 }
