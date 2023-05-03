@@ -30,9 +30,11 @@ class GetLateActivity : AppCompatActivity() {
                 SQLiteDatabase.OPEN_READWRITE
             )
             val cursor = db.rawQuery(
-                """SELECT bl.Book_Id, b.Title, bl.Branch_Id, lb.Branch_Name, bl.Card_No, bo.Name AS Borrower_Name, bl.Date_Out, bl.Due_Date, bl.Returned_date,
-CASE WHEN bl.Returned_date IS NULL THEN 0 ELSE julianday(bl.Returned_date) - julianday(bl.Due_Date) END AS Days_Late,
-CASE WHEN bl.Returned_date IS NULL OR julianday(bl.Returned_date) <= julianday(bl.Due_Date) THEN 0 ELSE (julianday(bl.Returned_date) - julianday(bl.Due_Date)) * lb.LateFee END AS Late_Fee
+                """SELECT bl.Book_Id, b.Title, bl.Branch_Id, bl.Card_No, bo.Name AS Borrower_Name,
+CASE WHEN bl.Returned_date IS NULL THEN 0 ELSE
+CASE WHEN julianday(bl.Returned_date) - julianday(bl.Due_Date) < 0 THEN 0
+ELSE julianday(bl.Returned_date) - julianday(bl.Due_Date) END
+END AS Days_Late
 FROM BOOK_LOANS bl
 INNER JOIN BOOK b ON bl.Book_Id = b.Book_Id
 INNER JOIN LIBRARY_BRANCH lb ON bl.Branch_Id = lb.Branch_Id
@@ -41,14 +43,14 @@ WHERE bl.Due_Date > '${startRange.text.toString()}' and bl.Due_Date < '${endRang
                 null
             )
             lateTable.removeAllViews()
-            var data = Array(7) { arrayOf("", "", "", "", "", "","") }
+            var data = Array(6) { arrayOf("", "", "", "", "", "") }
             data += arrayOf(
                 cursor.getColumnName(0) + " ",
                 cursor.getColumnName(1) + " ",
                 cursor.getColumnName(2) + " ",
                 cursor.getColumnName(3) + " ",
                 cursor.getColumnName(4) + " ",
-                cursor.getColumnName(5) + " "
+                cursor.getColumnName(5) + " ",
             )
 
             if (cursor.moveToFirst()) {
@@ -59,6 +61,7 @@ WHERE bl.Due_Date > '${startRange.text.toString()}' and bl.Due_Date < '${endRang
                     val branch_name = cursor.getString(3)
                     val Card_No = cursor.getString(4)
                     val name = cursor.getString(5)
+
                     data += arrayOf(book_id, title, branch_id, branch_name, Card_No, name)
                     Log.v("HELLO",name)
                 } while (cursor.moveToNext())

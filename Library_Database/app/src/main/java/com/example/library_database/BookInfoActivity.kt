@@ -21,7 +21,8 @@ class BookInfoActivity : AppCompatActivity() {
     fun updateBorrowerListTable(db: SQLiteDatabase, bookId:String, bookName:String, bookListTable:TableLayout){
         val cursor = db.rawQuery(
             """SELECT b.Book_Id, b.Title, lb.Branch_Id, lb.Branch_Name,
-      CASE WHEN bl.Returned_date IS NULL OR julianday(bl.Returned_date) <= julianday(bl.Due_Date) THEN 'Non-Applicable' ELSE '${'$'} ' || printf('%.2f',CAST((julianday(bl.Returned_date) - julianday(bl.Due_Date)) * lb.LateFee AS DECIMAL(10,2)) END AS Late_Fee_Amount
+CASE WHEN bl.Returned_date IS NULL OR julianday(bl.Returned_date) <= julianday(bl.Due_Date) THEN 'Non-Applicable' ELSE '${'$'} ' || printf('%.2f',CAST((julianday(bl.Returned_date) - julianday(bl.Due_Date)) * lb.LateFee AS DECIMAL(10,2))) END AS Late_Fee_Amount,
+CASE WHEN bl.Returned_date IS NULL OR julianday(bl.Returned_date) <= julianday(bl.Due_Date) THEN 0 ELSE CAST((julianday(bl.Returned_date) - julianday(bl.Due_Date)) * lb.LateFee AS DECIMAL(10,2)) END AS Late_Fee_Amount_hidden
 FROM BOOK_LOANS bl
 INNER JOIN BOOK b ON bl.Book_Id = b.Book_Id
 INNER JOIN LIBRARY_BRANCH lb ON bl.Branch_Id = lb.Branch_Id
@@ -29,7 +30,7 @@ INNER JOIN BORROWER bo ON bl.Card_No = bo.Card_No
 WHERE b.Book_Id LIKE '%$bookId%' AND b.Title LIKE '%$bookName%'
 GROUP BY b.Book_Id, lb.Branch_Id
 HAVING Late_Fee_Amount IS NOT NULL
-ORDER BY Late_Fee_Amount DESC;""", null
+ORDER BY Late_Fee_Amount_hidden DESC;""", null
         )
         bookListTable.removeAllViews()
         var data = Array(5) { arrayOf("", "", "","","") }
